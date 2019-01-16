@@ -12,8 +12,8 @@ public abstract class Tracer {
     private static int tracerCount = 0;
     private static ArrayList<Trace> traces = new ArrayList<>();
 
-    private static final int maxTraces = Integer.parseInt(System.getenv("MAX_TRACES"));
-    private static final int maxTracers = Integer.parseInt(System.getenv("MAX_TRACERS"));
+    private static final int MAX_TRACES = 1000000;
+    private static final int MAX_TRACERS = 100;
 
     private static class Trace {
         private String tracerKey;
@@ -38,8 +38,10 @@ public abstract class Tracer {
     protected static void addTrace(String tracerKey, String method, Object[] args) {
         Trace trace = new Trace(tracerKey, method, args);
         traces.add(trace);
-        if (traces.size() > maxTraces) throw new Error("Traces Limit Exceeded");
-        if (tracerCount > maxTracers) throw new Error("Tracers Limit Exceeded");
+        if (traces.size() > MAX_TRACES)
+            throw new Error("Traces Limit Exceeded");
+        if (tracerCount > MAX_TRACERS)
+            throw new Error("Tracers Limit Exceeded");
     }
 
     protected String key;
