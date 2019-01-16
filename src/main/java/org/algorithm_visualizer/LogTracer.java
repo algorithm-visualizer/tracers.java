@@ -1,4 +1,4 @@
-package org.algorithm_visualizer.tracers;
+package org.algorithm_visualizer;
 
 public class LogTracer extends Tracer {
     public LogTracer(String title) {

@@ -1,65 +1,65 @@
-package org.algorithm_visualizer.tracers;
+package org.algorithm_visualizer;
 
-public class Array1DTracer extends Tracer {
-    public Array1DTracer(String title) {
+public class ChartTracer extends Tracer {
+    public ChartTracer(String title) {
         super(title);
     }
 
-    public Array1DTracer() {
+    public ChartTracer() {
         this(null);
     }
 
-    public Array1DTracer set(Object array1d) {
+    public ChartTracer set(Object array1d) {
         addTrace(key, "set", new Object[]{array1d});
         return this;
     }
 
-    public Array1DTracer set() {
+    public ChartTracer set() {
         addTrace(key, "set", new Object[]{});
         return this;
     }
 
-    public Array1DTracer reset() {
+    public ChartTracer reset() {
         addTrace(key, "reset", new Object[]{});
         return this;
     }
 
-    public Array1DTracer delay() {
+    public ChartTracer delay() {
         addTrace(key, "delay", new Object[]{});
         return this;
     }
 
-    public Array1DTracer patch(int x, Object v) {
+    public ChartTracer patch(int x, Object v) {
         addTrace(key, "patch", new Object[]{x, v});
         return this;
     }
 
-    public Array1DTracer depatch(int x) {
+    public ChartTracer depatch(int x) {
         addTrace(key, "depatch", new Object[]{x});
         return this;
     }
 
-    public Array1DTracer select(int x) {
+    public ChartTracer select(int x) {
         addTrace(key, "select", new Object[]{x});
         return this;
     }
 
-    public Array1DTracer select(int sx, int ex) {
+    public ChartTracer select(int sx, int ex) {
         addTrace(key, "select", new Object[]{sx, ex});
         return this;
     }
 
-    public Array1DTracer deselect(int x) {
+    public ChartTracer deselect(int x) {
         addTrace(key, "deselect", new Object[]{x});
         return this;
     }
 
-    public Array1DTracer deselect(int sx, int ex) {
+    public ChartTracer deselect(int sx, int ex) {
         addTrace(key, "deselect", new Object[]{sx, ex});
         return this;
     }
 
-    public Array1DTracer chart(ChartTracer chartTracer) {
+    public ChartTracer chart(ChartTracer chartTracer) {
         addTrace(key, "chart", new Object[]{chartTracer.key});
         return this;
     }

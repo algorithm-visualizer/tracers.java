@@ -1,4 +1,4 @@
-package org.algorithm_visualizer.tracers;
+package org.algorithm_visualizer;
 
 import com.google.gson.Gson;
 

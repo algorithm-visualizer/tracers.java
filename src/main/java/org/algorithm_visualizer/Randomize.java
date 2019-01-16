@@ -1,4 +1,4 @@
-package org.algorithm_visualizer.tracers;
+package org.algorithm_visualizer;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

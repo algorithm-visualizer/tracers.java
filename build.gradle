@@ -15,4 +15,4 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 }
 
-shadowJar.archiveName = 'tracers.jar'
+shadowJar.archiveName = 'algorithm-visualizer.jar'
