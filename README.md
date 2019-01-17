@@ -12,7 +12,7 @@ This repository is part of the project [Algorithm Visualizer](https://github.com
 
 ## Usage
 
-```js
+```java
 import org.algorithm_visualizer.*;
 
 class Main {
