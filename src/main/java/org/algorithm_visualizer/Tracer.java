@@ -2,9 +2,15 @@ package org.algorithm_visualizer;
 
 import com.google.gson.Gson;
 
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public abstract class Tracer {
@@ -55,11 +61,33 @@ public abstract class Tracer {
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
-                FileWriter fileWriter = new FileWriter("traces.json");
-                PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.print(gson.toJson(traces));
-                printWriter.close();
-            } catch (IOException e) {
+                String content = gson.toJson(traces);
+                if (System.getenv("ALGORITHM_VISUALIZER") == null) {
+                    URL postUrl = new URL("https://algorithm-visualizer.org/api/visualizations");
+                    String params = "content=" + URLEncoder.encode(content, "UTF-8");
+
+                    HttpURLConnection conn = (HttpURLConnection) postUrl.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    conn.setRequestProperty("Content-Length", Integer.toString(params.getBytes().length));
+                    conn.setDoOutput(true);
+
+                    DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
+                    writer.writeBytes(params);
+                    writer.close();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    URL openUrl = new URL(reader.readLine());
+                    reader.close();
+
+                    Desktop.getDesktop().browse(openUrl.toURI());
+                } else {
+                    FileWriter fileWriter = new FileWriter("traces.json");
+                    PrintWriter printWriter = new PrintWriter(fileWriter);
+                    printWriter.print(content);
+                    printWriter.close();
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }));
