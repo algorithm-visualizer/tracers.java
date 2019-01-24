@@ -33,4 +33,17 @@ public class LogTracer extends Tracer {
         addTrace(key, "print", new Object[]{message});
         return this;
     }
+
+    public LogTracer println(Object message) {
+        addTrace(key, "println", new Object[]{message});
+        return this;
+    }
+
+    public LogTracer printf(String format, Object... args) {
+        Object[] traceArgs = new Object[args.length + 1];
+        traceArgs[0] = format;
+        System.arraycopy(args, 0, traceArgs, 1, args.length);
+        addTrace(key, "printf", traceArgs);
+        return this;
+    }
 }
