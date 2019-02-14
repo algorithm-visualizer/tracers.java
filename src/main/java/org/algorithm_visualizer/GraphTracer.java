@@ -25,6 +25,31 @@ public class GraphTracer extends Tracer {
         return this;
     }
 
+    public GraphTracer layoutCircle() {
+        command("layoutCircle", new Object[]{});
+        return this;
+    }
+
+    public GraphTracer layoutTree(Object root, boolean sorted) {
+        command("layoutTree", new Object[]{root, sorted});
+        return this;
+    }
+
+    public GraphTracer layoutTree(Object root) {
+        command("layoutTree", new Object[]{root});
+        return this;
+    }
+
+    public GraphTracer layoutTree() {
+        command("layoutTree", new Object[]{});
+        return this;
+    }
+
+    public GraphTracer layoutRandom() {
+        command("layoutRandom", new Object[]{});
+        return this;
+    }
+
     public void addNode(Object id, double weight, double x, double y, int visitedCount, int selectedCount) {
         command("addNode", new Object[]{id, weight, x, y, visitedCount, selectedCount});
     }
@@ -111,26 +136,6 @@ public class GraphTracer extends Tracer {
 
     public void removeEdge(Object source, Object target) {
         command("removeEdge", new Object[]{source, target});
-    }
-
-    public void layoutCircle() {
-        command("layoutCircle", new Object[]{});
-    }
-
-    public void layoutTree(Object root, boolean sorted) {
-        command("layoutTree", new Object[]{root, sorted});
-    }
-
-    public void layoutTree(Object root) {
-        command("layoutTree", new Object[]{root});
-    }
-
-    public void layoutTree() {
-        command("layoutTree", new Object[]{});
-    }
-
-    public void layoutRandom() {
-        command("layoutRandom", new Object[]{});
     }
 
     public void visit(Object target, Object source, double weight) {
