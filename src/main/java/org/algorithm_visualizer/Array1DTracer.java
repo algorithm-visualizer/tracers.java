@@ -1,66 +1,39 @@
 package org.algorithm_visualizer;
 
-public class Array1DTracer extends Tracer {
-    public Array1DTracer(String title) {
-        super(title);
+public class Array1DTracer extends Array2DTracer {
+    public void set(Object array1d) {
+        command("set", new Object[]{array1d});
     }
 
-    public Array1DTracer() {
-        this(null);
+    public void patch(int x, Object v) {
+        command("patch", new Object[]{x, v});
     }
 
-    public Array1DTracer set(Object array1d) {
-        addTrace(key, "set", new Object[]{array1d});
-        return this;
+    public void patch(int x) {
+        command("patch", new Object[]{x});
     }
 
-    public Array1DTracer set() {
-        addTrace(key, "set", new Object[]{});
-        return this;
+    public void depatch(int x) {
+        command("depatch", new Object[]{x});
     }
 
-    public Array1DTracer reset() {
-        addTrace(key, "reset", new Object[]{});
-        return this;
+    public void select(int sx, int ex) {
+        command("select", new Object[]{sx, ex});
     }
 
-    public Array1DTracer delay() {
-        addTrace(key, "delay", new Object[]{});
-        return this;
+    public void select(int x) {
+        command("select", new Object[]{x});
     }
 
-    public Array1DTracer patch(int x, Object v) {
-        addTrace(key, "patch", new Object[]{x, v});
-        return this;
+    public void deselect(int sx, int ex) {
+        command("deselect", new Object[]{sx, ex});
     }
 
-    public Array1DTracer depatch(int x) {
-        addTrace(key, "depatch", new Object[]{x});
-        return this;
+    public void deselect(int x) {
+        command("deselect", new Object[]{x});
     }
 
-    public Array1DTracer select(int x) {
-        addTrace(key, "select", new Object[]{x});
-        return this;
-    }
-
-    public Array1DTracer select(int sx, int ex) {
-        addTrace(key, "select", new Object[]{sx, ex});
-        return this;
-    }
-
-    public Array1DTracer deselect(int x) {
-        addTrace(key, "deselect", new Object[]{x});
-        return this;
-    }
-
-    public Array1DTracer deselect(int sx, int ex) {
-        addTrace(key, "deselect", new Object[]{sx, ex});
-        return this;
-    }
-
-    public Array1DTracer chart(ChartTracer chartTracer) {
-        addTrace(key, "chart", new Object[]{chartTracer.key});
-        return this;
+    public void chart(ChartTracer chartTracer) {
+        command("chart", new Object[]{chartTracer});
     }
 }

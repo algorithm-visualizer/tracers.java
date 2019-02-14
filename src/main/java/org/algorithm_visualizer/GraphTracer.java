@@ -1,241 +1,179 @@
 package org.algorithm_visualizer;
 
 public class GraphTracer extends Tracer {
-    public GraphTracer(String title) {
-        super(title);
-    }
-
-    public GraphTracer() {
-        this(null);
-    }
-
-    public GraphTracer set(Object array2d) {
-        addTrace(key, "set", new Object[]{array2d});
-        return this;
-    }
-
-    public GraphTracer set() {
-        addTrace(key, "set", new Object[]{});
-        return this;
-    }
-
-    public GraphTracer reset() {
-        addTrace(key, "reset", new Object[]{});
-        return this;
-    }
-
-    public GraphTracer delay() {
-        addTrace(key, "delay", new Object[]{});
-        return this;
+    public void set(Object array2d) {
+        command("set", new Object[]{array2d});
     }
 
     public GraphTracer directed(boolean isDirected) {
-        addTrace(key, "directed", new Object[]{isDirected});
+        command("directed", new Object[]{isDirected});
         return this;
     }
 
     public GraphTracer directed() {
-        addTrace(key, "directed", new Object[]{});
+        command("directed", new Object[]{});
         return this;
     }
 
     public GraphTracer weighted(boolean isWeighted) {
-        addTrace(key, "weighted", new Object[]{isWeighted});
+        command("weighted", new Object[]{isWeighted});
         return this;
     }
 
     public GraphTracer weighted() {
-        addTrace(key, "weighted", new Object[]{});
+        command("weighted", new Object[]{});
         return this;
     }
 
-    public GraphTracer addNode(Object id, double weight, double x, double y, int visitedCount, int selectedCount) {
-        addTrace(key, "addNode", new Object[]{id, weight, x, y, visitedCount, selectedCount});
-        return this;
+    public void addNode(Object id, double weight, double x, double y, int visitedCount, int selectedCount) {
+        command("addNode", new Object[]{id, weight, x, y, visitedCount, selectedCount});
     }
 
-    public GraphTracer addNode(Object id, double weight, double x, double y, int visitedCount) {
-        addTrace(key, "addNode", new Object[]{id, weight, x, y, visitedCount});
-        return this;
+    public void addNode(Object id, double weight, double x, double y, int visitedCount) {
+        command("addNode", new Object[]{id, weight, x, y, visitedCount});
     }
 
-    public GraphTracer addNode(Object id, double weight, double x, double y) {
-        addTrace(key, "addNode", new Object[]{id, weight, x, y});
-        return this;
+    public void addNode(Object id, double weight, double x, double y) {
+        command("addNode", new Object[]{id, weight, x, y});
     }
 
-    public GraphTracer addNode(Object id, double weight, double x) {
-        addTrace(key, "addNode", new Object[]{id, weight, x});
-        return this;
+    public void addNode(Object id, double weight, double x) {
+        command("addNode", new Object[]{id, weight, x});
     }
 
-    public GraphTracer addNode(Object id, double weight) {
-        addTrace(key, "addNode", new Object[]{id, weight});
-        return this;
+    public void addNode(Object id, double weight) {
+        command("addNode", new Object[]{id, weight});
     }
 
-    public GraphTracer addNode(Object id) {
-        addTrace(key, "addNode", new Object[]{id});
-        return this;
+    public void addNode(Object id) {
+        command("addNode", new Object[]{id});
     }
 
-    public GraphTracer updateNode(Object id, double weight, double x, double y, int visitedCount, int selectedCount) {
-        addTrace(key, "updateNode", new Object[]{id, weight, x, y, visitedCount, selectedCount});
-        return this;
+    public void updateNode(Object id, double weight, double x, double y, int visitedCount, int selectedCount) {
+        command("updateNode", new Object[]{id, weight, x, y, visitedCount, selectedCount});
     }
 
-    public GraphTracer updateNode(Object id, double weight, double x, double y, int visitedCount) {
-        addTrace(key, "updateNode", new Object[]{id, weight, x, y, visitedCount});
-        return this;
+    public void updateNode(Object id, double weight, double x, double y, int visitedCount) {
+        command("updateNode", new Object[]{id, weight, x, y, visitedCount});
     }
 
-    public GraphTracer updateNode(Object id, double weight, double x, double y) {
-        addTrace(key, "updateNode", new Object[]{id, weight, x, y});
-        return this;
+    public void updateNode(Object id, double weight, double x, double y) {
+        command("updateNode", new Object[]{id, weight, x, y});
     }
 
-    public GraphTracer updateNode(Object id, double weight, double x) {
-        addTrace(key, "updateNode", new Object[]{id, weight, x});
-        return this;
+    public void updateNode(Object id, double weight, double x) {
+        command("updateNode", new Object[]{id, weight, x});
     }
 
-    public GraphTracer updateNode(Object id, double weight) {
-        addTrace(key, "updateNode", new Object[]{id, weight});
-        return this;
+    public void updateNode(Object id, double weight) {
+        command("updateNode", new Object[]{id, weight});
     }
 
-    public GraphTracer updateNode(Object id) {
-        addTrace(key, "updateNode", new Object[]{id});
-        return this;
+    public void updateNode(Object id) {
+        command("updateNode", new Object[]{id});
     }
 
-    public GraphTracer removeNode(Object id) {
-        addTrace(key, "removeNode", new Object[]{id});
-        return this;
+    public void removeNode(Object id) {
+        command("removeNode", new Object[]{id});
     }
 
-    public GraphTracer addEdge(Object source, Object target, double weight, int visitedCount, int selectedCount) {
-        addTrace(key, "addEdge", new Object[]{source, target, weight, visitedCount, selectedCount});
-        return this;
+    public void addEdge(Object source, Object target, double weight, int visitedCount, int selectedCount) {
+        command("addEdge", new Object[]{source, target, weight, visitedCount, selectedCount});
     }
 
-    public GraphTracer addEdge(Object source, Object target, double weight, int visitedCount) {
-        addTrace(key, "addEdge", new Object[]{source, target, weight, visitedCount});
-        return this;
+    public void addEdge(Object source, Object target, double weight, int visitedCount) {
+        command("addEdge", new Object[]{source, target, weight, visitedCount});
     }
 
-    public GraphTracer addEdge(Object source, Object target, double weight) {
-        addTrace(key, "addEdge", new Object[]{source, target, weight});
-        return this;
+    public void addEdge(Object source, Object target, double weight) {
+        command("addEdge", new Object[]{source, target, weight});
     }
 
-    public GraphTracer addEdge(Object source, Object target) {
-        addTrace(key, "addEdge", new Object[]{source, target});
-        return this;
+    public void addEdge(Object source, Object target) {
+        command("addEdge", new Object[]{source, target});
     }
 
-    public GraphTracer updateEdge(Object source, Object target, double weight, int visitedCount, int selectedCount) {
-        addTrace(key, "updateEdge", new Object[]{source, target, weight, visitedCount, selectedCount});
-        return this;
+    public void updateEdge(Object source, Object target, double weight, int visitedCount, int selectedCount) {
+        command("updateEdge", new Object[]{source, target, weight, visitedCount, selectedCount});
     }
 
-    public GraphTracer updateEdge(Object source, Object target, double weight, int visitedCount) {
-        addTrace(key, "updateEdge", new Object[]{source, target, weight, visitedCount});
-        return this;
+    public void updateEdge(Object source, Object target, double weight, int visitedCount) {
+        command("updateEdge", new Object[]{source, target, weight, visitedCount});
     }
 
-    public GraphTracer updateEdge(Object source, Object target, double weight) {
-        addTrace(key, "updateEdge", new Object[]{source, target, weight});
-        return this;
+    public void updateEdge(Object source, Object target, double weight) {
+        command("updateEdge", new Object[]{source, target, weight});
     }
 
-    public GraphTracer updateEdge(Object source, Object target) {
-        addTrace(key, "updateEdge", new Object[]{source, target});
-        return this;
+    public void updateEdge(Object source, Object target) {
+        command("updateEdge", new Object[]{source, target});
     }
 
-    public GraphTracer removeEdge(Object source, Object target) {
-        addTrace(key, "removeEdge", new Object[]{source, target});
-        return this;
+    public void removeEdge(Object source, Object target) {
+        command("removeEdge", new Object[]{source, target});
     }
 
-    public GraphTracer layoutCircle() {
-        addTrace(key, "layoutCircle", new Object[]{});
-        return this;
+    public void layoutCircle() {
+        command("layoutCircle", new Object[]{});
     }
 
-    public GraphTracer layoutTree(Object root, boolean sorted) {
-        addTrace(key, "layoutTree", new Object[]{root, sorted});
-        return this;
+    public void layoutTree(Object root, boolean sorted) {
+        command("layoutTree", new Object[]{root, sorted});
     }
 
-    public GraphTracer layoutTree(Object root) {
-        addTrace(key, "layoutTree", new Object[]{root});
-        return this;
+    public void layoutTree(Object root) {
+        command("layoutTree", new Object[]{root});
     }
 
-    public GraphTracer layoutTree() {
-        addTrace(key, "layoutTree", new Object[]{});
-        return this;
+    public void layoutTree() {
+        command("layoutTree", new Object[]{});
     }
 
-    public GraphTracer layoutRandom() {
-        addTrace(key, "layoutRandom", new Object[]{});
-        return this;
+    public void layoutRandom() {
+        command("layoutRandom", new Object[]{});
     }
 
-    public GraphTracer visit(Object target, Object source, double weight) {
-        addTrace(key, "visit", new Object[]{target, source, weight});
-        return this;
+    public void visit(Object target, Object source, double weight) {
+        command("visit", new Object[]{target, source, weight});
     }
 
-    public GraphTracer visit(Object target, Object source) {
-        addTrace(key, "visit", new Object[]{target, source});
-        return this;
+    public void visit(Object target, Object source) {
+        command("visit", new Object[]{target, source});
     }
 
-    public GraphTracer visit(Object target) {
-        addTrace(key, "visit", new Object[]{target});
-        return this;
+    public void visit(Object target) {
+        command("visit", new Object[]{target});
     }
 
-    public GraphTracer leave(Object target, Object source, double weight) {
-        addTrace(key, "leave", new Object[]{target, source, weight});
-        return this;
+    public void leave(Object target, Object source, double weight) {
+        command("leave", new Object[]{target, source, weight});
     }
 
-    public GraphTracer leave(Object target, Object source) {
-        addTrace(key, "leave", new Object[]{target, source});
-        return this;
+    public void leave(Object target, Object source) {
+        command("leave", new Object[]{target, source});
     }
 
-    public GraphTracer leave(Object target) {
-        addTrace(key, "leave", new Object[]{target});
-        return this;
+    public void leave(Object target) {
+        command("leave", new Object[]{target});
     }
 
-    public GraphTracer select(Object target, Object source) {
-        addTrace(key, "select", new Object[]{target, source});
-        return this;
+    public void select(Object target, Object source) {
+        command("select", new Object[]{target, source});
     }
 
-    public GraphTracer select(Object target) {
-        addTrace(key, "select", new Object[]{target});
-        return this;
+    public void select(Object target) {
+        command("select", new Object[]{target});
     }
 
-    public GraphTracer deselect(Object target, Object source) {
-        addTrace(key, "deselect", new Object[]{target, source});
-        return this;
+    public void deselect(Object target, Object source) {
+        command("deselect", new Object[]{target, source});
     }
 
-    public GraphTracer deselect(Object target) {
-        addTrace(key, "deselect", new Object[]{target});
-        return this;
+    public void deselect(Object target) {
+        command("deselect", new Object[]{target});
     }
 
-    public GraphTracer log(LogTracer logTracer) {
-        addTrace(key, "log", new Object[]{logTracer.key});
-        return this;
+    public void log(LogTracer logTracer) {
+        command("log", new Object[]{logTracer});
     }
 }
