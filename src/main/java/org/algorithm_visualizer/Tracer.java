@@ -1,6 +1,14 @@
 package org.algorithm_visualizer;
 
 public abstract class Tracer extends Commander {
+    public static void delay(int lineNumber) {
+        command(null, "delay", new Object[]{lineNumber});
+    }
+
+    public static void delay() {
+        command(null, "delay", new Object[]{});
+    }
+
     public Tracer(String title) {
         super(new Object[]{title});
     }

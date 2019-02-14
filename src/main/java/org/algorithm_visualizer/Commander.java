@@ -38,7 +38,7 @@ public abstract class Commander {
     private static int objectCount = 0;
     private static ArrayList<Command> commands = new ArrayList<>();
 
-    private static void command(String key, String method, Object[] args) {
+    static void command(String key, String method, Object[] args) {
         commands.add(new Command(
                 key,
                 method,
@@ -48,18 +48,6 @@ public abstract class Commander {
             throw new Error("Too Many Commands");
         if (objectCount > MAX_OBJECTS)
             throw new Error("Too Many Objects");
-    }
-
-    public static void setRoot(Commander child) {
-        command(null, "setRoot", new Object[]{child});
-    }
-
-    public static void delay(int lineNumber) {
-        command(null, "delay", new Object[]{lineNumber});
-    }
-
-    public static void delay() {
-        command(null, "delay", new Object[]{});
     }
 
     private final String key;
@@ -81,9 +69,9 @@ public abstract class Commander {
     }
 
     static {
-        GsonBuilder gsonBuilder = new GsonBuilder();
+        GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls();
         JsonSerializer<Commander> serializer = (src, typeOfSrc, context) -> new JsonPrimitive(src.key);
-        gsonBuilder.registerTypeAdapter(Commander.class, serializer);
+        gsonBuilder.registerTypeHierarchyAdapter(Commander.class, serializer);
         gson = gsonBuilder.create();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
