@@ -1,6 +1,14 @@
 package org.algorithm_visualizer;
 
 public class LogTracer extends Tracer {
+    public LogTracer(String title) {
+        super(title);
+    }
+
+    public LogTracer() {
+        super();
+    }
+
     public void set(Object log) {
         command("set", new Object[]{log});
     }

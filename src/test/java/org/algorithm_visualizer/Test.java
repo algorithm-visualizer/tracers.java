@@ -1,35 +1,45 @@
-package org.algorithm_visualizer;
+package org.algorithm_visualizer;// import visualization libraries {
 
-import org.algorithm_visualizer.*;
+// }
 
 class Test {
-    static GraphTracer tracer = new GraphTracer();
-    tracer.log(new LogTracer());
-    static int G[][] = { // G[i][j] indicates whether the path from the i-th node to the j-th node exists or not
-            {0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    // define tracer variables {
+    Array2DTracer array2dTracer = new Array2DTracer("Grid");
+    LogTracer logTracer = new LogTracer("Console");
+    // }
+
+    // define input variables
+    String[] messages = {
+            "Visualize",
+            "your",
+            "own",
+            "code",
+            "here!",
     };
 
-    static void DFS(int node, int parent) { // node = current node, parent = previous node
-        tracer.visit(node, parent).delay();
-        for (int i = 0; i < G[node].length; i++) {
-            if (G[node][i] == 1) { // if current node has the i-th node as a child
-                DFS(i, node); // recursively call DFS
-            }
-        }
+    // highlight each line of messages recursively
+    void highlight(int line) {
+        if (line >= messages.length) return;
+        String message = messages[line];
+        // visualize {
+        logTracer.println(message);
+        array2dTracer.selectRow(line, 0, message.length() - 1);
+        Tracer.delay();
+        array2dTracer.deselectRow(line, 0, message.length() - 1);
+        // }
+        highlight(line + 1);
+    }
+
+    Test() {
+        // visualize {
+        Layout.setRoot(new VerticalLayout(new Commander[]{array2dTracer, logTracer}));
+        array2dTracer.set(messages);
+        Tracer.delay();
+        // }
+        highlight(0);
     }
 
     public static void main(String[] args) {
-        tracer.set(G).layoutTree(0).delay();
-        DFS(0, -1);
+        new Test();
     }
 }

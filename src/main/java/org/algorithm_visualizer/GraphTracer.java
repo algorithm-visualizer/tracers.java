@@ -1,6 +1,14 @@
 package org.algorithm_visualizer;
 
 public class GraphTracer extends Tracer {
+    public GraphTracer(String title) {
+        super(title);
+    }
+
+    public GraphTracer() {
+        super();
+    }
+
     public void set(Object array2d) {
         command("set", new Object[]{array2d});
     }

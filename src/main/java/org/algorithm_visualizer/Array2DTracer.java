@@ -1,6 +1,14 @@
 package org.algorithm_visualizer;
 
 public class Array2DTracer extends Tracer {
+    public Array2DTracer(String title) {
+        super(title);
+    }
+
+    public Array2DTracer() {
+        super();
+    }
+
     public void set(Object array2d) {
         command("set", new Object[]{array2d});
     }
