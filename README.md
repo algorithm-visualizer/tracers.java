@@ -1,8 +1,9 @@
 # tracers.java [![Maven Central](https://img.shields.io/maven-central/v/org.algorithm-visualizer/tracers-java.svg?style=flat-square)](https://search.maven.org/artifact/org.algorithm-visualizer/tracers-java)
 
-> `tracers.java` is a visualization library for Java.
+> This repository is part of the project [Algorithm Visualizer](https://github.com/algorithm-visualizer).
 
-This repository is part of the project [Algorithm Visualizer](https://github.com/algorithm-visualizer).
+`tracers.java` is a visualization library for Java.
+You can use it on [algorithm-visualizer.org](https://algorithm-visualizer.org/) or locally on your machine.
 
 ## Installation
 
