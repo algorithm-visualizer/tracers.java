@@ -1,9 +1,8 @@
-plugins {
-    id 'com.github.johnrengelman.shadow' version '2.0.4'
-    id 'java-library'
-}
+apply plugin: 'java-library'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
-group = 'org.algorithm_visualizer'
+group = 'org.algorithm-visualizer'
 version = '2.3.1'
 sourceCompatibility = 1.8
 
@@ -15,4 +14,65 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 }
 
-shadowJar.archiveName = 'algorithm-visualizer.jar'
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'tracers.java'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Visualization Library for Java'
+                url 'https://github.com/algorithm-visualizer/tracers.java'
+
+                scm {
+                    connection 'scm:git:git@github.com:algorithm-visualizer/tracers.java.git'
+                    developerConnection 'scm:git:git@github.com:algorithm-visualizer/tracers.java.git'
+                    url 'https://github.com/algorithm-visualizer/tracers.java'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'http://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'parkjs814'
+                        name 'Jinseo Jason Park'
+                        email 'jason.park@gatech.edu'
+                    }
+                }
+            }
+        }
+    }
+}
