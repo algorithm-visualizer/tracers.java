@@ -2,6 +2,4 @@
 /.gradle
 /build
 /out
-/gradle.properties
-/pubring.gpg
 .DS_Store
