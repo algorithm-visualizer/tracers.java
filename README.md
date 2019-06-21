@@ -1,4 +1,4 @@
-# tracers.java [![Maven Central](https://img.shields.io/maven-central/v/org.algorithm-visualizer/tracers-java.svg?style=flat-square)](https://search.maven.org/artifact/org.algorithm-visualizer/tracers-java) [![Travis (.com)](https://img.shields.io/travis/com/algorithm-visualizer/tracers.java.svg?style=flat-square)](https://travis-ci.com/algorithm-visualizer/tracers.java)
+# tracers.java [![Maven Central](https://img.shields.io/maven-central/v/org.algorithm-visualizer/tracers-java.svg?style=flat-square)](https://search.maven.org/artifact/org.algorithm-visualizer/tracers-java) [![API reference](https://img.shields.io/badge/documentation-java-red.svg?style=flat-square)](https://javadoc.io/doc/org.algorithm-visualizer/tracers-java/) [![Travis (.com)](https://img.shields.io/travis/com/algorithm-visualizer/tracers.java.svg?style=flat-square)](https://travis-ci.com/algorithm-visualizer/tracers.java)
 
 > This repository is part of the project [Algorithm Visualizer](https://github.com/algorithm-visualizer).
 
@@ -37,7 +37,7 @@ class Main {
 }
 ```
 
-Check out the [API reference](https://github.com/algorithm-visualizer/algorithm-visualizer/wiki) for more information.
+Check out the [API reference](https://javadoc.io/doc/org.algorithm-visualizer/tracers-java/) for more information.
 
 ## Contributing
 
