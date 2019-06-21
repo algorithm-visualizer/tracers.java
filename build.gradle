@@ -1,13 +1,8 @@
-plugins {
-    id 'de.marcphilipp.nexus-publish' version '0.2.0'
-    id 'io.codearte.nexus-staging' version '0.21.0'
-}
-
 apply plugin: 'java-library'
-apply plugin: 'signing'
+apply plugin: 'maven-publish'
 
 group = 'org.algorithm-visualizer'
-version = '2.3.5'
+version = '2.3.6'
 sourceCompatibility = 1.8
 
 repositories {
@@ -28,56 +23,7 @@ task javadocJar(type: Jar) {
     from javadoc
 }
 
-allprojects {
-    ext.'signing.keyId' = System.getenv('SIGNING_KEY_ID')
-    ext.'signing.password' = System.getenv('SIGNING_PASSWORD')
-    ext.'signing.secretKeyRingFile' = 'pubring.gpg'
-}
-
-signing {
-    sign publishing.publications
-}
-
-nexusStaging {
-    username = System.getenv('OSSRH_USERNAME')
-    password = System.getenv('OSSRH_PASSWORD')
-    packageGroup = 'org.algorithm-visualizer'
-    stagingProfileId = "bf87e8672f1be7"
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            pom {
-                packaging 'jar'
-                name = 'tracers.java'
-                description = 'Visualization Library for Java'
-                url = 'https://github.com/algorithm-visualizer/tracers.java'
-
-                scm {
-                    connection = 'scm:git:git@github.com:algorithm-visualizer/tracers.java.git'
-                    developerConnection = 'scm:git:git@github.com:algorithm-visualizer/tracers.java.git'
-                    url = 'https://github.com/algorithm-visualizer/tracers.java'
-                }
-
-                licenses {
-                    license {
-                        name = 'The MIT License (MIT)'
-                        url = 'http://opensource.org/licenses/MIT'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = 'parkjs814'
-                        name = 'Jinseo Jason Park'
-                        email = 'jason.park@gatech.edu'
-                    }
-                }
-            }
-        }
-    }
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
