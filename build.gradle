@@ -1,8 +1,8 @@
 apply plugin: 'java-library'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
 
 group = 'org.algorithm-visualizer'
-version = '2.3.6'
+version = '2.3.7'
 sourceCompatibility = 1.8
 
 repositories {
