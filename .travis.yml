@@ -5,12 +5,38 @@ before_cache:
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
 deploy:
-  - provider: releases
-    api_key:
-      secure: Va5i+Jn2pDMm+65t3rA7rA7AkOl0zmQhecCXkvHTdxq/ETWlWGlt9YBN17wWW8rHQx4BPfN/PSpvisTaevTyWBlc7bVnHJlPOBVYk13El0q8H45EMmNuGZveL9suN7q+l6oZk3ZHA8Y5OCHr7jvnXnMa5XfBM5N1am27lFXrSx/+CsPyVnmP+m2g2U0iLAJNnW4H/eU3hJzKsf9LwbPlLGdH6t1CdOQOhBsMr/yOe3ThRjkRQ49XGwl8XXewkA7AsItGUxBQkAqMBwv5NuiGCcNK7oiiDGI8z8ZDZasedHzWlx9NgIdCLv6XGXV/5UK/MsuFjF2V+Bx4WRryh7ERwjMmcucutEejpxO/zlPwdKD6nCmcYZQmR9ITlp2v1Efn41p7x/uyFfmIGJGNTJ3hLK5uHPQSn+ahCbF/0y5Mbwz3u8U0mYxukOKHRoJs812ubezsM2IOvyPCkYtBiSHVLB13l9uuWZfVU85nUuyHzcLMacIvqic7YxDgbbP4c4ZW8kYeHONRGu+sgWj00iLMRClcjR+UdjISEqBxa36XCxUVaHq3btVnhiUq37YBLoorEtxN1Pz27JGAmxDlTm9s3cx4FLW+A1CbAg17D6eg9tqziOkcBEzAkAD0DvH/GWEZkuSuE3aiujJTc7qhOWONU3WR062Ow/c6QU2bCMpQPOs=
+  # Publish Javadoc to GitHub Pages
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_ACCESS_TOKEN
+    local_dir: build/docs/javadoc
+    keep_history: true
     on:
-      branch: master
       tags: true
+
+  # Create a GitHub release
+  - provider: releases
+    api_key: $GITHUB_ACCESS_TOKEN
+    on:
+      tags: true
+
+  # Trigger JitPack to build
+  - provider: script
+    script: .travis/jitpack.sh $TRAVIS_TAG
+    on:
+      tags: true
+
+  # Trigger Travis CI to deploy `extractor.java`
+  - provider: script
+    script: .travis/extractor.sh $TRAVIS_TAG $TRAVIS_ACCESS_TOKEN
+    on:
+      tags: true
+env:
+  global:
+    # GITHUB_ACCESS_TOKEN
+    - secure: hEgt5ke7q8FouZlRjKTq6eXWSKOAzEK3Li8ffBl7WdcXgorRH7C6dY4aXldHNaG4+R2FCOSzwf8ke5XYZRJT/J45QKWAapJ/hTOqzjD2kWBf0sBcshLrSsyKWx3o6n0jaO8Owv+pgw0f4IcEIOoGW0Lj6Sq1RmErn6i8Whi9FIV9BSKG/ICpyPA+iqqpwYdZzP87D/w4wrlYzSOwLfmM08m46n/xsBiazNFH+Urj4/a9Lo2doA6FoCcFyc8wPQ0naX/y1Mj2UyJdlhVAqgmHGZ06DWpl8sUAXos/gCLOrSRgittjyDh+echRsziIJCBuIHdx1vSyUWiGpLzrb42FM6QuD0GoqqXbK84dm9rdK43rO/jBbGgib5xJK3itguqRk6BlSgMoYMZ5Fiv4uo42UDwgz+XF6xfw84eJdbwk+GtGzN5VgH9Qgnkl6sDsEkvPUAR6tlXvqP8s9Jkvkc4Xte4pXDL/m8Penv3ZBfwGsQQXB6tYEVS452HbhqPPRgrGM0LTGXIf/GyfLq2wEl1xVHZNcb7IP/I61X5A6B9szhtITqft6YEmAgyB8wdoQh8g/7pl8cFIh1kRvzS/MzMBaYhORS1kDbukYFLvscVwLwedUohsNlfpek744E1OUP26YYxwPF1NU2ym1R/hZ/M8O/C2gwAa8bZtRKQcQDDv/GY=
+    # TRAVIS_ACCESS_TOKEN
+    - secure: r2CXlCj8MkmlF+TPpBaRXy8Kl7leMAY5LrkUcQ4dU0MvCoAH1oGmGTitCIfjny0AFhCaGZu7jelTGI2SqZ115c1HYF/e4sXglrXWRU84LZjR+zro8hHmGTXrYZfhO5zYHmQYU6CfO8N5LWFlAzPgxrgRVJRKTyxv1JEc/dhIY0zjdbxE4cdCCIsLykPA6YG65w8OJbMnP4iZugmoBumh+Nr51bg8Ml72new8z6amVjKQC+xBVdwR+WWHPa7OE77B5eRd55jlLuUc9P8KZjYXm5VMVEQJnuTtI2X7roTDVszXGNT3cVCJQH44m3H4w1W8GHFU+SBOiyO4Yu0f0ecncvuH/P0LrwGvxotkpZiDK7CIfAoJKrNiCitUcU8ouuE+vX1wLio30L3CkrWxSHryp/MPYQTES1s26MeXuISf2R+twozmXQg/Cnpxw5WS8txzKNbwISlEJVXYMn80qHs7Jk9yGVzxgWEF3TZyWJwupRZbpruzQzz9+khPkyvyZd5kICb+85nL1Pxdbp3IirIoBJ40opnDahFWbx+KAkEx9OcVcxofDGr2gqRu15VW2OPhVE4NMtxMFeXFp+rhec32Pj2nhxk+IU8DwhG26yw/g/uUchIAN/7QXrppPsHY1D6hwtAkdg/42lZdzJHnivebLE58biRlFumBa24i4uyMWXU=
