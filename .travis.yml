@@ -5,8 +5,8 @@ before_cache:
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - "$HOME/.gradle/caches/"
-    - "$HOME/.gradle/wrapper/"
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 deploy:
   # Publish Javadoc to GitHub Pages
   - provider: pages
@@ -31,7 +31,7 @@ deploy:
 
   # Trigger Travis CI to deploy `extractor.java`
   - provider: script
-    script: .travis/extractor.sh $TRAVIS_TAG $TRAVIS_ACCESS_TOKEN
+    script: .travis/extractor.sh $TRAVIS_ACCESS_TOKEN
     on:
       tags: true
 env:

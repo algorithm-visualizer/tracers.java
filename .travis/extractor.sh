@@ -1,18 +1,11 @@
 #!/usr/bin/env bash
 
-TRAVIS_TAG=$1
-TRAVIS_ACCESS_TOKEN=$2
+TRAVIS_ACCESS_TOKEN=$1
 GITHUB_USER="algorithm-visualizer"
 GITHUB_REPO="extractor.java"
-
 BODY="{
   \"request\": {
-    \"branch\": \"master\",
-    \"config\": {
-      \"env\": {
-        \"TRACERS_VERSION\": \"${TRAVIS_TAG}\"
-      }
-    }
+    \"branch\": \"master\"
   }
 }"
 
