@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
-TRAVIS_TAG=$1
+JITPACK_ACCESS_TOKEN=$1
+TRAVIS_TAG=$2
+GROUP_ID="org.algorithm-visualizer"
+ARTIFACT_ID="tracers.java"
 MAX_RETRIES=42
 INTERVAL=5
+
+# Remove the artifact of the same version if it already exists
+curl -u${JITPACK_ACCESS_TOKEN}: -X DELETE "https://jitpack.io/api/builds/${GROUP_ID}/${ARTIFACT_ID}/${TRAVIS_TAG}"
 
 for (( i=1; i<=MAX_RETRIES; ++i)); do
   STATUS_CODE=$(curl -s -o /dev/stderr -w "%{http_code}" \
